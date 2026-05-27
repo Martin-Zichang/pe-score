@@ -43,21 +43,11 @@ textarea:focus { outline: none; border-color: #58a6ff; }
 .file-info .file-size { color: #8b949e; font-size: 12px; margin-left: 8px; }
 .progress-bar { display: none; height: 4px; background: #21262d; border-radius: 2px; margin: 12px 0; overflow: hidden; }
 .progress-bar .fill { height: 100%; background: #1f6feb; border-radius: 2px; transition: width 0.3s; width: 0%; }
-.prompt-box { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px; margin-top: 12px; font-size: 12px; line-height: 1.6; color: #c9d1d9; white-space: pre-wrap; max-height: 300px; overflow-y: auto; position: relative; }
-.copy-btn { position: absolute; top: 8px; right: 8px; }
-.step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #1f6feb; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 8px; }
-.step { margin-bottom: 16px; padding: 12px; background: #0d1117; border-radius: 8px; border-left: 3px solid #1f6feb; }
-.step-label { font-size: 13px; color: #8b949e; margin-bottom: 6px; }
-.step-content { font-size: 14px; }
-.dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.dim-avg { color: #58a6ff; font-size: 14px; font-weight: 600; }
-.sub-item { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; padding: 4px 0; }
-.sub-label { flex: 1; font-size: 13px; color: #c9d1d9; }
-.sub-desc { font-size: 11px; color: #8b949e; margin-left: 4px; }
-.stars { display: flex; gap: 2px; }
-.star { cursor: pointer; font-size: 20px; color: #30363d; transition: color 0.15s; user-select: none; }
-.star.active { color: #f0b429; }
-.star:hover { color: #f7c948; }
+.hint { font-size: 12px; color: #8b949e; margin-top: 6px; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding-bottom: 20px; }
+.footer a { color: #58a6ff; text-decoration: none; }
+
+/* Result styles */
 .result { display: none; margin-top: 20px; }
 .score-big { text-align: center; padding: 30px 0; }
 .score-num { font-size: 64px; font-weight: 800; }
@@ -73,38 +63,47 @@ textarea:focus { outline: none; border-color: #58a6ff; }
 .compare-table th, .compare-table td { padding: 8px 12px; border: 1px solid #30363d; text-align: center; }
 .compare-table th { background: #21262d; color: #8b949e; }
 .compare-table td:first-child { text-align: left; }
-.hint { font-size: 12px; color: #8b949e; margin-top: 6px; }
-.or-divider { text-align: center; color: #484f58; font-size: 13px; margin: 12px 0; position: relative; }
-.or-divider::before, .or-divider::after { content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: #30363d; }
-.or-divider::before { left: 0; } .or-divider::after { right: 0; }
-.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding-bottom: 20px; }
-.footer a { color: #58a6ff; text-decoration: none; }
-
-/* Report styles */
-.report-section { margin-bottom: 16px; }
-.report-section h3 { font-size: 15px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #30363d; }
-.risk-item { padding: 10px 12px; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #f85149; background: rgba(248,81,73,0.06); }
-.risk-item strong { color: #f85149; }
-.highlight-item { padding: 10px 12px; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #3fb950; background: rgba(63,185,80,0.06); }
-.highlight-item strong { color: #3fb950; }
 .dim-analysis { margin-bottom: 12px; padding: 10px 12px; background: #0d1117; border-radius: 8px; }
 .dim-analysis-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .dim-analysis-name { font-weight: 600; font-size: 14px; }
-.dim-analysis-score { font-size: 14px; font-weight: 700; }
 .dim-analysis-detail { font-size: 13px; color: #8b949e; }
 .dim-analysis-detail .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
 .tag-green { background: rgba(63,185,80,0.15); color: #3fb950; }
 .tag-red { background: rgba(248,81,73,0.15); color: #f85149; }
+.risk-item { padding: 10px 12px; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #f85149; background: rgba(248,81,73,0.06); }
+.risk-item strong { color: #f85149; }
+.highlight-item { padding: 10px 12px; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #3fb950; background: rgba(63,185,80,0.06); }
+.highlight-item strong { color: #3fb950; }
 .dd-item { padding: 8px 12px; margin-bottom: 6px; background: #0d1117; border-radius: 6px; font-size: 13px; border-left: 3px solid #1f6feb; }
 .dd-item .priority { color: #f0b429; font-weight: 600; margin-right: 6px; }
 .summary-box { padding: 16px; background: linear-gradient(135deg, rgba(31,111,235,0.1), rgba(88,166,255,0.05)); border: 1px solid rgba(88,166,255,0.2); border-radius: 8px; font-size: 14px; line-height: 1.8; }
-.export-btn { margin-top: 12px; }
+.security-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); border-radius: 20px; font-size: 11px; color: #3fb950; }
+.loading-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(13,17,23,0.85); z-index: 1000; justify-content: center; align-items: center; }
+.loading-overlay.active { display: flex; }
+.loading-box { background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 40px; text-align: center; max-width: 400px; }
+.loading-spinner { width: 48px; height: 48px; border: 3px solid #30363d; border-top-color: #58a6ff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-step { font-size: 13px; color: #8b949e; margin-top: 8px; }
+.loading-step.active { color: #58a6ff; }
+.loading-step.done { color: #3fb950; }
+.dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.dim-avg { color: #58a6ff; font-size: 14px; font-weight: 600; }
+.sub-item { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; padding: 4px 0; }
+.sub-label { flex: 1; font-size: 13px; color: #c9d1d9; }
+.sub-desc { font-size: 11px; color: #8b949e; margin-left: 4px; }
+.stars { display: flex; gap: 2px; }
+.star { cursor: pointer; font-size: 20px; color: #30363d; transition: color 0.15s; user-select: none; }
+.star.active { color: #f0b429; }
+.star:hover { color: #f7c948; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #1f6feb; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 8px; }
+.step { margin-bottom: 16px; padding: 12px; background: #0d1117; border-radius: 8px; border-left: 3px solid #1f6feb; }
+.step-label { font-size: 13px; color: #8b949e; margin-bottom: 6px; }
 </style>
 </head>
 <body>
 <div class="container">
 <h1>PE-<span>Score</span> 🎯</h1>
-<p class="subtitle">7维度35子指标 PE投资评分框架 | 31案例回测 ρ=0.864 | <a href="https://github.com/Martin-Zichang/pe-score" style="color:#58a6ff">GitHub</a></p>
+<p class="subtitle">7维度35子指标 PE投资评分框架 | 31案例回测 ρ=0.864 | <span class="security-badge">🔒 自动祛密 · AI自毁</span> | <a href="https://github.com/Martin-Zichang/pe-score" style="color:#58a6ff">GitHub</a></p>
 
 <!-- Meta info -->
 <div class="card">
@@ -122,7 +121,7 @@ textarea:focus { outline: none; border-color: #58a6ff; }
 <!-- Tabs -->
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('upload')">📤 上传BP</button>
-  <button class="tab-btn" onclick="switchTab('auto')">🤖 AI评分</button>
+  <button class="tab-btn" onclick="switchTab('text')">📝 粘贴文本</button>
   <button class="tab-btn" onclick="switchTab('manual')">✋ 手动评分</button>
 </div>
 
@@ -144,54 +143,24 @@ textarea:focus { outline: none; border-color: #58a6ff; }
       <button class="btn btn-sm btn-orange" style="float:right" onclick="clearFile()">移除</button>
     </div>
     
-    <div class="progress-bar" id="progressBar"><div class="fill" id="progressFill"></div></div>
-
     <div class="btn-row">
-      <button class="btn btn-primary btn-block" id="analyzeBtn" onclick="analyzeFile()" disabled>🚀 分析BP并生成报告</button>
+      <button class="btn btn-primary btn-block" id="analyzeBtn" onclick="analyzeFile()" disabled>🚀 上传分析 · 自动祛密 · 生成报告</button>
     </div>
     
-    <p class="hint" style="text-align:center;margin-top:8px">上传后自动提取文本 → 生成评分Prompt → AI评分 → 出完整报告</p>
-  </div>
-  
-  <!-- Extracted text preview -->
-  <div class="card" id="extractedCard" style="display:none">
-    <h2><span class="icon">📝</span> 提取的BP内容</h2>
-    <textarea id="extractedText" readonly style="min-height:120px"></textarea>
-    <div class="btn-row">
-      <button class="btn btn-blue btn-sm" onclick="generatePromptFromUpload()">📋 生成评分Prompt</button>
-      <button class="btn btn-primary btn-sm" onclick="switchTab('auto')">🤖 去AI评分 →</button>
+    <div style="text-align:center;margin-top:8px">
+      <span class="security-badge">🔒 数据自动脱敏后发送</span>
+      <span class="security-badge" style="margin-left:6px">🗑️ AI分析后自动销毁</span>
     </div>
   </div>
 </div>
 
-<!-- Tab: AI Score -->
-<div class="tab-content" id="tab-auto">
+<!-- Tab: Text Input -->
+<div class="tab-content" id="tab-text">
   <div class="card">
-    <h2><span class="icon">🤖</span> AI自动评分 — 三步完成</h2>
-    
-    <div class="step">
-      <div class="step-label"><span class="step-num">1</span> 粘贴BP/项目简介内容</div>
-      <textarea id="bpText" placeholder="把BP内容、项目介绍、财务数据等粘贴到这里...&#10;&#10;支持任意格式，越详细评分越准确"></textarea>
-    </div>
-
-    <div class="step">
-      <div class="step-label"><span class="step-num">2</span> 生成分析Prompt → 复制到任意AI</div>
-      <div class="btn-row">
-        <button class="btn btn-blue" onclick="genPrompt()">📋 生成Prompt</button>
-      </div>
-      <div id="promptArea" style="display:none; position:relative; margin-top:12px;">
-        <div class="prompt-box" id="promptText"></div>
-        <button class="btn btn-sm btn-orange copy-btn" onclick="copyPrompt()">复制</button>
-        <p class="hint">👆 复制到 ChatGPT / 豆包 / Claude 等AI，让它返回评分JSON</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-label"><span class="step-num">3</span> 粘贴AI返回的完整评分结果</div>
-      <textarea id="aiResponse" placeholder='粘贴AI返回的JSON，支持两种格式：&#10;&#10;格式1（仅分数）：&#10;{"团队":[5,3,3,3,3],"市场":[4,4,4,3,3],...}&#10;&#10;格式2（含分析，推荐）：&#10;{"scores":{"团队":[5,3,3,3,3],...},"risk_warnings":[...],"highlights":[...],...}' style="min-height:140px"></textarea>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="parseAndScore()">📊 生成完整评分报告</button>
-      </div>
+    <h2><span class="icon">📝</span> 粘贴BP文本内容</h2>
+    <textarea id="bpText" placeholder="把BP内容、项目介绍、财务数据等粘贴到这里...&#10;&#10;支持任意格式，越详细评分越准确&#10;&#10;🔒 发送前会自动脱敏敏感信息"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary btn-block" onclick="analyzeText()">🚀 分析评分 · 自动祛密 · 生成报告</button>
     </div>
   </div>
 </div>
@@ -202,9 +171,20 @@ textarea:focus { outline: none; border-color: #58a6ff; }
   <button class="btn btn-primary btn-block" onclick="calcManualScore()">📊 生成评分报告</button>
 </div>
 
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="loading-spinner"></div>
+    <div style="font-size:16px;font-weight:600;margin-bottom:12px" id="loadingTitle">正在分析...</div>
+    <div class="loading-step" id="step1">⏳ 提取文本内容</div>
+    <div class="loading-step" id="step2">🔒 自动祛密脱敏</div>
+    <div class="loading-step" id="step3">🤖 AI评分分析中</div>
+    <div class="loading-step" id="step4">📊 生成评分报告</div>
+  </div>
+</div>
+
 <!-- Result -->
 <div class="result" id="result">
-  <!-- Overall Score -->
   <div class="card">
     <div class="score-big">
       <div class="score-num" id="scoreNum"></div>
@@ -213,73 +193,64 @@ textarea:focus { outline: none; border-color: #58a6ff; }
     </div>
   </div>
 
-  <!-- AI Summary -->
+  <div class="card" id="securityCard" style="display:none">
+    <h2><span class="icon">🔒</span> 安全处理报告</h2>
+    <div id="securityInfo" style="font-size:13px;color:#8b949e"></div>
+  </div>
+
   <div class="card" id="aiSummaryCard" style="display:none">
-    <h2><span class="icon">📝</span> AI投资摘要</h2>
+    <h2><span class="icon">📝</span> 投资摘要</h2>
     <div class="summary-box" id="aiSummary"></div>
   </div>
 
-  <!-- Risk Warnings -->
   <div class="card" id="riskCard" style="display:none">
     <h2><span class="icon">🔴</span> 核心风险警示</h2>
     <div id="riskWarnings"></div>
   </div>
 
-  <!-- Key Highlights -->
   <div class="card" id="highlightCard" style="display:none">
     <h2><span class="icon">🟢</span> 核心亮点</h2>
     <div id="highlights"></div>
   </div>
 
-  <!-- Dimension Scores -->
   <div class="card">
     <h2><span class="icon">📊</span> 维度评分</h2>
     <div id="dimBars"></div>
   </div>
 
-  <!-- Dimension Analysis -->
   <div class="card" id="dimAnalysisCard" style="display:none">
-    <h2><span class="icon">🔍</span> 各维度详细分析</h2>
+    <h2><span class="icon">🔍</span> 各维度分析</h2>
     <div id="dimAnalysis"></div>
   </div>
 
-  <!-- Score Table -->
   <div class="card">
     <h2><span class="icon">📋</span> 评分明细</h2>
-    <table class="compare-table" id="scoreTable">
-      <tr><th>维度</th><th>子指标1</th><th>子指标2</th><th>子指标3</th><th>子指标4</th><th>子指标5</th><th>均分</th><th>权重</th><th>加权分</th></tr>
-    </table>
+    <table class="compare-table" id="scoreTable"></table>
   </div>
 
-  <!-- Due Diligence -->
   <div class="card" id="ddCard" style="display:none">
     <h2><span class="icon">🎯</span> 尽调建议</h2>
     <div id="ddItems"></div>
   </div>
 
-  <!-- Compare with Benchmarks -->
   <div class="card">
     <h2><span class="icon">📈</span> 与回测案例对比</h2>
-    <table class="compare-table" id="compareTable">
-      <tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>
-    </table>
+    <table class="compare-table" id="compareTable"></table>
   </div>
 
-  <!-- Investment Advice -->
   <div class="card">
     <h2><span class="icon">💡</span> 投资建议</h2>
     <div class="advice" id="advice"></div>
   </div>
 
-  <!-- Export -->
   <div class="card" style="text-align:center">
-    <button class="btn btn-blue export-btn" onclick="exportReport()">📄 导出评分报告（Markdown）</button>
+    <button class="btn btn-blue" onclick="exportReport()">📄 导出评分报告（Markdown）</button>
   </div>
 </div>
 
 <div class="footer">
-  PE-Score v0.4.0 | 数据驱动的PE投资评分框架 | <a href="https://github.com/Martin-Zichang/pe-score">GitHub</a><br>
-  ⚠️ 本工具仅为决策辅助，不构成投资建议
+  PE-Score v0.5.0 | 数据驱动的PE投资评分框架 | <a href="https://github.com/Martin-Zichang/pe-score">GitHub</a><br>
+  ⚠️ 本工具仅为决策辅助，不构成投资建议 | 🔒 所有数据自动脱敏，AI分析后自毁
 </div>
 </div>
 
@@ -299,11 +270,28 @@ const BENCHMARK = [["宁德时代","early",4.87,"A","500x"],["百济神州","ear
 const dimNames = Object.keys(DIMS);
 const dimColors = ["#f97583","#79c0ff","#56d4dd","#d2a8ff","#f0b429","#3fb950","#ffab70"];
 const manualScores = new Array(35).fill(0);
-
-// Store analysis data for export
 let reportData = null;
 
-// Drag & drop
+// ===== Backend API URL =====
+// 尝试多个地址（本地部署/云端）
+const API_URLS = [
+  'http://localhost:8765',
+  'http://127.0.0.1:8765'
+];
+let API_BASE = API_URLS[0];
+
+// Detect API availability
+async function detectAPI() {
+  for (const url of API_URLS) {
+    try {
+      const resp = await fetch(url + '/api/health', {signal: AbortSignal.timeout(3000)});
+      if (resp.ok) { API_BASE = url; return true; }
+    } catch(e) {}
+  }
+  return false;
+}
+
+// ===== File Upload =====
 const uploadArea = document.getElementById('uploadArea');
 uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
 uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
@@ -327,12 +315,11 @@ function clearFile() {
   document.getElementById('fileInfo').style.display = 'none';
   document.getElementById('analyzeBtn').disabled = true;
   document.getElementById('fileInput').value = '';
-  document.getElementById('extractedCard').style.display = 'none';
   window._uploadedFile = null;
 }
 
-// ===== PPT Text Extraction =====
-async function extractPptxText(arrayBuffer) {
+// ===== PPT Text Extraction (client-side fallback) =====
+async function extractPptxTextClient(arrayBuffer) {
   if (!window.JSZip) {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js';
@@ -354,155 +341,230 @@ async function extractPptxText(arrayBuffer) {
   return slides.join('\n\n');
 }
 
+// ===== Client-side Desensitization =====
+function desensitizeClient(text) {
+  let result = text;
+  let count = 0;
+  // Phone numbers
+  result = result.replace(/1[3-9]\d{9}/g, () => { count++; return '[手机号已脱敏]'; });
+  // Email
+  result = result.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, () => { count++; return '[邮箱已脱敏]'; });
+  // ID card
+  result = result.replace(/[1-9]\d{5}(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])\d{3}[\dXx]/g, () => { count++; return '[身份证号已脱敏]'; });
+  // Bank accounts
+  result = result.replace(/\b\d{16,19}\b/g, () => { count++; return '[银行账号已脱敏]'; });
+  return {text: result, count};
+}
+
+// ===== Analyze via Backend API =====
 async function analyzeFile() {
   const file = window._uploadedFile;
   if (!file) return;
-  const btn = document.getElementById('analyzeBtn');
-  btn.disabled = true; btn.textContent = '⏳ 正在提取文本...';
-  const progressBar = document.getElementById('progressBar');
-  const progressFill = document.getElementById('progressFill');
-  progressBar.style.display = 'block'; progressFill.style.width = '30%';
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    let text = '';
-    if (file.name.endsWith('.pptx')) { text = await extractPptxText(arrayBuffer); }
-    else { text = '⚠️ .ppt格式暂不支持浏览器端解析，请将文件另存为.pptx后重试'; }
-    progressFill.style.width = '70%';
-    if (text && !text.startsWith('⚠️')) {
-      document.getElementById('extractedCard').style.display = 'block';
-      document.getElementById('extractedText').value = text;
-      document.getElementById('bpText').value = text;
-      progressFill.style.width = '100%';
-      btn.textContent = '✅ 文本提取完成';
-      setTimeout(() => { generatePromptFromUpload(); switchTab('auto'); }, 500);
-    } else {
-      document.getElementById('extractedCard').style.display = 'block';
-      document.getElementById('extractedText').value = text;
-      progressFill.style.width = '100%';
-      btn.textContent = '⚠️ 请手动粘贴文本';
-      switchTab('auto');
+  
+  const apiAvailable = await detectAPI();
+  
+  if (apiAvailable) {
+    // Use backend API (with server-side desensitization + Coze AI)
+    showLoading();
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('project_name', document.getElementById('projName').value || '');
+      formData.append('stage', document.getElementById('projStage').value);
+      
+      updateLoadingStep(1, 'done');
+      updateLoadingStep(2, 'active');
+      
+      const resp = await fetch(API_BASE + '/api/analyze', {method: 'POST', body: formData});
+      if (!resp.ok) throw new Error('API返回错误: ' + resp.status);
+      
+      updateLoadingStep(2, 'done');
+      updateLoadingStep(3, 'done');
+      updateLoadingStep(4, 'active');
+      
+      const data = await resp.json();
+      
+      hideLoading();
+      
+      if (data.analysis) {
+        let scores = [];
+        const analysis = data.analysis;
+        
+        if (analysis.scores) {
+          for (const dim of dimNames) {
+            if (analysis.scores[dim]) analysis.scores[dim].forEach(v => scores.push(v));
+          }
+        } else {
+          // Try flat format
+          for (const dim of dimNames) {
+            if (analysis[dim] && Array.isArray(analysis[dim])) analysis[dim].forEach(v => scores.push(v));
+          }
+        }
+        
+        if (scores.length === 35) {
+          renderResult(scores, analysis, data.security);
+        } else if (analysis.raw_response) {
+          // Try to parse JSON from raw response
+          const jsonMatch = analysis.raw_response.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            try {
+              const parsed = JSON.parse(jsonMatch[0]);
+              let ps = [];
+              const src = parsed.scores || parsed;
+              for (const dim of dimNames) { if (src[dim]) src[dim].forEach(v => ps.push(v)); }
+              if (ps.length === 35) {
+                renderResult(ps, parsed, data.security);
+              } else {
+                alert('AI返回数据格式异常，请重试');
+              }
+            } catch(e) { alert('AI返回数据解析失败'); }
+          } else {
+            alert('AI返回数据格式异常');
+          }
+        }
+      }
+    } catch(e) {
+      hideLoading();
+      alert('后端服务连接失败: ' + e.message + '\n\n请确保server.py正在运行，或使用"粘贴文本"模式');
     }
-  } catch(e) { alert('解析失败: ' + e.message); progressFill.style.width = '0%'; btn.textContent = '🚀 分析BP并生成报告'; btn.disabled = false; }
-  setTimeout(() => { progressBar.style.display = 'none'; btn.disabled = false; btn.textContent = '🚀 分析BP并生成报告'; }, 2000);
+  } else {
+    // Fallback: client-side extraction + generate prompt
+    showLoading();
+    updateLoadingStep(1, 'active');
+    
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      let text = '';
+      if (file.name.endsWith('.pptx')) {
+        text = await extractPptxTextClient(arrayBuffer);
+      }
+      
+      updateLoadingStep(1, 'done');
+      updateLoadingStep(2, 'active');
+      
+      const desensitized = desensitizeClient(text);
+      
+      updateLoadingStep(2, 'done');
+      hideLoading();
+      
+      if (text) {
+        // Auto-fill text tab and generate prompt
+        document.getElementById('bpText').value = desensitized.text;
+        switchTab('text');
+        
+        // Show info about needing backend
+        const needServer = confirm(
+          '⚠️ 后端服务未启动\n\n' +
+          '当前模式：本地提取文本 + 祛密（已完成✅）\n' +
+          '缺少：AI自动评分（需要后端服务）\n\n' +
+          '如需一键出报告，请在服务器运行：\n' +
+          'pip install fastapi uvicorn python-pptx\n' +
+          'python server.py\n\n' +
+          '点击"确定"使用手动评分模式\n' +
+          '点击"取消"先启动后端服务'
+        );
+        
+        if (needServer) {
+          switchTab('manual');
+        }
+      }
+    } catch(e) {
+      hideLoading();
+      alert('文件解析失败: ' + e.message);
+    }
+  }
 }
 
-function generatePromptFromUpload() {
-  const text = document.getElementById('extractedText').value || document.getElementById('bpText').value;
-  if (text) { document.getElementById('bpText').value = text; genPrompt(); }
+async function analyzeText() {
+  const text = document.getElementById('bpText').value.trim();
+  if (!text) { alert('请粘贴BP内容'); return; }
+  
+  const apiAvailable = await detectAPI();
+  
+  if (apiAvailable) {
+    showLoading();
+    try {
+      updateLoadingStep(1, 'done');
+      updateLoadingStep(2, 'active');
+      
+      const formData = new FormData();
+      formData.append('text', text);
+      formData.append('project_name', document.getElementById('projName').value || '');
+      formData.append('stage', document.getElementById('projStage').value);
+      
+      const resp = await fetch(API_BASE + '/api/analyze', {method: 'POST', body: formData});
+      if (!resp.ok) throw new Error('API返回错误: ' + resp.status);
+      
+      updateLoadingStep(2, 'done');
+      updateLoadingStep(3, 'done');
+      updateLoadingStep(4, 'active');
+      
+      const data = await resp.json();
+      hideLoading();
+      
+      if (data.analysis) {
+        let scores = [];
+        const analysis = data.analysis;
+        const src = analysis.scores || analysis;
+        for (const dim of dimNames) { if (src[dim] && Array.isArray(src[dim])) src[dim].forEach(v => scores.push(v)); }
+        if (scores.length === 35) {
+          renderResult(scores, analysis, data.security);
+        } else if (analysis.raw_response) {
+          const jsonMatch = analysis.raw_response.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            try {
+              const parsed = JSON.parse(jsonMatch[0]);
+              let ps = [];
+              const src2 = parsed.scores || parsed;
+              for (const dim of dimNames) { if (src2[dim]) src2[dim].forEach(v => ps.push(v)); }
+              if (ps.length === 35) renderResult(ps, parsed, data.security);
+              else alert('AI返回数据格式异常');
+            } catch(e) { alert('AI返回数据解析失败'); }
+          }
+        }
+      }
+    } catch(e) {
+      hideLoading();
+      alert('后端服务连接失败: ' + e.message);
+    }
+  } else {
+    // Client-side desensitization only
+    const desensitized = desensitizeClient(text);
+    alert(
+      '⚠️ 后端服务未启动，无法自动AI评分\n\n' +
+      '已自动脱敏 ' + desensitized.count + ' 处敏感信息\n\n' +
+      '请启动后端服务后重试：\npip install fastapi uvicorn python-pptx\npython server.py'
+    );
+  }
+}
+
+// ===== Loading UI =====
+function showLoading() {
+  document.getElementById('loadingOverlay').classList.add('active');
+  ['step1','step2','step3','step4'].forEach(id => {
+    document.getElementById(id).className = 'loading-step';
+  });
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('active');
+}
+function updateLoadingStep(num, state) {
+  const el = document.getElementById('step' + num);
+  el.className = 'loading-step ' + state;
+  if (state === 'active') {
+    const icons = {1:'⏳',2:'🔒',3:'🤖',4:'📊'};
+    el.textContent = icons[num] + ' ' + el.textContent.replace(/^[⏳🔒🤖📊✅]\s*/, '');
+  } else if (state === 'done') {
+    const labels = {1:'提取文本内容',2:'自动祛密脱敏',3:'AI评分分析',4:'生成评分报告'};
+    el.textContent = '✅ ' + labels[num];
+  }
 }
 
 // ===== Tab switching =====
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', ['upload','auto','manual'][i] === tab));
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', ['upload','text','manual'][i] === tab));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-}
-
-// ===== AI Score Prompt =====
-function genPrompt() {
-  const name = document.getElementById('projName').value || '该项目';
-  const stage = document.getElementById('projStage').value;
-  const stageMap = {seed:'种子轮',early:'A轮/早期',late:'B轮+/后期',pre_ipo:'Pre-IPO'};
-  const bp = document.getElementById('bpText').value.trim();
-  if (!bp) { alert('请先粘贴BP内容或上传PPT'); return; }
-  
-  const prompt = `你是一位资深PE投资分析师，请根据以下项目信息，使用PE-Score评分框架（7维度35子指标，每项1-5分）对该项目进行评分并生成完整投资分析报告。
-
-## 项目信息
-项目名称：${name}
-投资阶段：${stageMap[stage]}
-
-${bp}
-
-## 评分框架
-请严格按照以下7个维度、每个维度5个子指标逐一评分（1-5分）：
-1=很差/高风险，2=偏弱，3=一般/行业平均，4=不错/高于平均，5=很强/核心优势
-
-- 团队：创始人行业势能、创始人操盘能力、团队拼图完整度、治理与激励、关键人风险(5=无依赖)
-- 市场：赛道天花板、需求爆发时点、竞争壁垒类型、客户粘性、下游分散度(5=高度分散)
-- 技术：技术原创度、知识产权厚度、技术路线风险、产业化成熟度、研发追赶壁垒
-- 财务：营收质量、盈利路径、资本效率、现金流健康度、财务规范性
-- 退出：退出路径明确度、退出时间窗口、监管适配度、估值锚定、流动性预期
-- 政策：产业政策方向、补贴税收红利、合规风险(5=低风险)、国资LP适配度、地方政府支持
-- 催化剂：短期催化事件、估值弹性、行业周期位置、逆向信号(5=无逆向)、下轮融资预期
-
-## 输出格式
-请严格按照以下JSON格式输出，不要添加任何其他内容：
-{
-  "scores": {"团队":[1,1,1,1,1],"市场":[1,1,1,1,1],"技术":[1,1,1,1,1],"财务":[1,1,1,1,1],"退出":[1,1,1,1,1],"政策":[1,1,1,1,1],"催化剂":[1,1,1,1,1]},
-  "risk_warnings": ["核心风险1：具体描述", "核心风险2：具体描述", "核心风险3：具体描述"],
-  "highlights": ["核心亮点1：具体描述", "核心亮点2：具体描述", "核心亮点3：具体描述"],
-  "dimension_analysis": {
-    "团队": {"strength": "该维度的核心优势", "concern": "该维度的核心疑虑"},
-    "市场": {"strength": "...", "concern": "..."},
-    "技术": {"strength": "...", "concern": "..."},
-    "财务": {"strength": "...", "concern": "..."},
-    "退出": {"strength": "...", "concern": "..."},
-    "政策": {"strength": "...", "concern": "..."},
-    "催化剂": {"strength": "...", "concern": "..."}
-  },
-  "due_diligence": ["尽调建议1：具体内容", "尽调建议2：具体内容", "尽调建议3：具体内容", "尽调建议4：具体内容"],
-  "summary": "一句话投资判断结论"
-}
-
-## 评分与分析要求
-1. 基于投资时点可获取的信息评分，不要后视偏差
-2. 每个子指标必须给出1-5的整数评分
-3. risk_warnings聚焦最关键的2-4个风险，每个需含具体数据和逻辑
-4. highlights聚焦最核心的2-3个优势，每个需含具体证据
-5. dimension_analysis每个维度一句话亮点+一句话疑虑
-6. due_diligence按优先级排序，给出4-5条可执行的尽调建议
-7. summary用一句判断性语言总结投资价值
-8. 严格按JSON格式输出，不要有其他文字`;
-
-  document.getElementById('promptText').textContent = prompt;
-  document.getElementById('promptArea').style.display = 'block';
-}
-
-function copyPrompt() {
-  const text = document.getElementById('promptText').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = '✅ 已复制'; setTimeout(() => btn.textContent = '复制', 2000);
-  });
-}
-
-function parseAndScore() {
-  const raw = document.getElementById('aiResponse').value.trim();
-  if (!raw) { alert('请粘贴AI返回的评分'); return; }
-  try {
-    const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('未找到JSON');
-    const data = JSON.parse(jsonMatch[0]);
-    
-    // Support both formats: {scores:{...}} and {团队:[...],...}
-    let scores = [];
-    let analysis = null;
-    
-    if (data.scores) {
-      // Full format with analysis
-      analysis = data;
-      for (const dim of dimNames) {
-        if (!data.scores[dim] || !Array.isArray(data.scores[dim]) || data.scores[dim].length !== 5)
-          throw new Error(`维度"${dim}"数据格式错误`);
-        data.scores[dim].forEach((v, i) => {
-          if (v < 1 || v > 5 || !Number.isInteger(v)) throw new Error(`${dim}第${i+1}个评分必须为1-5整数`);
-          scores.push(v);
-        });
-      }
-    } else {
-      // Simple format: just scores
-      for (const dim of dimNames) {
-        if (!data[dim] || !Array.isArray(data[dim]) || data[dim].length !== 5)
-          throw new Error(`维度"${dim}"数据格式错误`);
-        data[dim].forEach((v, i) => {
-          if (v < 1 || v > 5 || !Number.isInteger(v)) throw new Error(`${dim}第${i+1}个评分必须为1-5整数`);
-          scores.push(v);
-        });
-      }
-    }
-    renderResult(scores, analysis);
-  } catch(e) { alert('解析失败：' + e.message + '\n\n请确保粘贴了完整的JSON格式数据'); }
 }
 
 // ===== Manual Score =====
@@ -529,24 +591,21 @@ function setStar(idx, val) {
 function calcManualScore() {
   const missing = manualScores.filter(s => s === 0).length;
   if (missing > 0) { alert(`还有 ${missing} 个子指标未评分`); return; }
-  renderResult([...manualScores], null);
+  renderResult([...manualScores], null, null);
 }
 
 // ===== Render Result =====
-function renderResult(scores, analysis) {
+function renderResult(scores, analysis, security) {
   const stage = document.getElementById('projStage').value;
   const name = document.getElementById('projName').value || '未命名项目';
   const weights = WEIGHTS[stage];
   const dimAvgs = [];
   const dimWeighted = [];
-  for (let i = 0; i < 7; i++) {
-    dimAvgs.push(scores.slice(i*5, i*5+5).reduce((a,b)=>a+b,0) / 5);
-  }
+  for (let i = 0; i < 7; i++) dimAvgs.push(scores.slice(i*5, i*5+5).reduce((a,b)=>a+b,0) / 5);
   const composite = dimAvgs.reduce((s, d, i) => s + d * weights[i], 0);
   dimAvgs.forEach((d, i) => dimWeighted.push(d * weights[i]));
   const grade = composite >= 4.0 ? 'A' : composite >= 3.0 ? 'B' : composite >= 2.0 ? 'C' : 'D';
   
-  // Store for export
   reportData = { name, stage, scores, dimAvgs, dimWeighted, composite, grade, weights, analysis };
 
   // Overall score
@@ -554,29 +613,38 @@ function renderResult(scores, analysis) {
   document.getElementById('scoreNum').style.color = grade==='A'?'#3fb950':grade==='B'?'#58a6ff':grade==='C'?'#d29922':'#f85149';
   document.getElementById('gradeText').textContent = `${grade}级`;
   document.getElementById('gradeText').className = `grade grade-${grade}`;
-  
   const stageLabel = {seed:'种子轮',early:'A轮/早期',late:'B轮+/后期',pre_ipo:'Pre-IPO'}[stage];
   document.getElementById('summaryLine').textContent = `${name} | ${stageLabel} | 7维度35子指标`;
 
+  // Security card
+  const secCard = document.getElementById('securityCard');
+  if (security) {
+    document.getElementById('securityInfo').innerHTML = 
+      `<span class="security-badge">🔒 已脱敏 ${security.redaction_count} 处</span> ` +
+      (security.redaction_summary && security.redaction_summary.length > 0 ? 
+        `<span style="margin-left:8px">涉及：${security.redaction_summary.join('、')}</span>` : '') +
+      `<br><span class="security-badge" style="margin-top:4px">🗑️ AI已执行自毁指令</span>` +
+      `<span style="margin-left:8px">${security.note || ''}</span>`;
+    secCard.style.display = 'block';
+  } else { secCard.style.display = 'none'; }
+
   // AI Summary
+  const src = analysis && analysis.scores ? analysis : (analysis && analysis.scores ? analysis : null);
   const aiSummaryCard = document.getElementById('aiSummaryCard');
-  if (analysis && analysis.summary) {
-    document.getElementById('aiSummary').textContent = analysis.summary;
+  if (src && src.summary) {
+    document.getElementById('aiSummary').textContent = src.summary;
     aiSummaryCard.style.display = 'block';
   } else { aiSummaryCard.style.display = 'none'; }
 
   // Risk Warnings
   const riskCard = document.getElementById('riskCard');
-  if (analysis && analysis.risk_warnings && analysis.risk_warnings.length > 0) {
+  if (src && src.risk_warnings && src.risk_warnings.length > 0) {
     let riskHtml = '';
-    analysis.risk_warnings.forEach((r, i) => {
-      const colonIdx = r.indexOf('：') > 0 ? r.indexOf('：') : r.indexOf(':');
+    src.risk_warnings.forEach((r, i) => {
+      const colonIdx = Math.max(r.indexOf('：'), r.indexOf(':'));
       let title = '', detail = r;
-      if (colonIdx > 0 && colonIdx < 20) {
-        title = r.substring(0, colonIdx);
-        detail = r.substring(colonIdx + 1);
-      }
-      riskHtml += `<div class="risk-item"><strong>⚠️ ${title || '风险' + (i+1)}</strong>${title ? '：' : ''}${detail}</div>`;
+      if (colonIdx > 0 && colonIdx < 20) { title = r.substring(0, colonIdx); detail = r.substring(colonIdx + 1); }
+      riskHtml += `<div class="risk-item"><strong>⚠️ ${title || '风险'+(i+1)}</strong>${title?'：':''}${detail}</div>`;
     });
     document.getElementById('riskWarnings').innerHTML = riskHtml;
     riskCard.style.display = 'block';
@@ -584,16 +652,13 @@ function renderResult(scores, analysis) {
 
   // Highlights
   const highlightCard = document.getElementById('highlightCard');
-  if (analysis && analysis.highlights && analysis.highlights.length > 0) {
+  if (src && src.highlights && src.highlights.length > 0) {
     let hlHtml = '';
-    analysis.highlights.forEach((h, i) => {
-      const colonIdx = h.indexOf('：') > 0 ? h.indexOf('：') : h.indexOf(':');
+    src.highlights.forEach((h, i) => {
+      const colonIdx = Math.max(h.indexOf('：'), h.indexOf(':'));
       let title = '', detail = h;
-      if (colonIdx > 0 && colonIdx < 20) {
-        title = h.substring(0, colonIdx);
-        detail = h.substring(colonIdx + 1);
-      }
-      hlHtml += `<div class="highlight-item"><strong>✅ ${title || '亮点' + (i+1)}</strong>${title ? '：' : ''}${detail}</div>`;
+      if (colonIdx > 0 && colonIdx < 20) { title = h.substring(0, colonIdx); detail = h.substring(colonIdx + 1); }
+      hlHtml += `<div class="highlight-item"><strong>✅ ${title || '亮点'+(i+1)}</strong>${title?'：':''}${detail}</div>`;
     });
     document.getElementById('highlights').innerHTML = hlHtml;
     highlightCard.style.display = 'block';
@@ -610,20 +675,15 @@ function renderResult(scores, analysis) {
 
   // Dimension Analysis
   const dimAnalysisCard = document.getElementById('dimAnalysisCard');
-  if (analysis && analysis.dimension_analysis) {
+  if (src && src.dimension_analysis) {
     let daHtml = '';
     dimNames.forEach((dim, i) => {
-      const da = analysis.dimension_analysis[dim];
+      const da = src.dimension_analysis[dim];
       if (!da) return;
       const color = dimColors[i];
       daHtml += `<div class="dim-analysis">
-        <div class="dim-analysis-header">
-          <span class="dim-analysis-name" style="color:${color}">${["👥","📈","🔬","💰","🚪","🏛️","⚡"][i]} ${dim} ${dimAvgs[i].toFixed(2)}</span>
-        </div>
-        <div class="dim-analysis-detail">
-          <span class="tag tag-green">亮点</span>${da.strength || '—'}<br>
-          <span class="tag tag-red">疑虑</span>${da.concern || '—'}
-        </div>
+        <div class="dim-analysis-header"><span class="dim-analysis-name" style="color:${color}">${["👥","📈","🔬","💰","🚪","🏛️","⚡"][i]} ${dim} ${dimAvgs[i].toFixed(2)}</span></div>
+        <div class="dim-analysis-detail"><span class="tag tag-green">亮点</span>${da.strength || '—'}<br><span class="tag tag-red">疑虑</span>${da.concern || '—'}</div>
       </div>`;
     });
     document.getElementById('dimAnalysis').innerHTML = daHtml;
@@ -632,7 +692,7 @@ function renderResult(scores, analysis) {
 
   // Score Detail Table
   let scoreTableHtml = '<tr><th>维度</th>';
-  DIMS[dimNames[0]].forEach((sub, i) => { scoreTableHtml += `<th>${sub[0]}</th>`; });
+  DIMS[dimNames[0]].forEach(sub => { scoreTableHtml += `<th>${sub[0]}</th>`; });
   scoreTableHtml += '<th>均分</th><th>权重</th><th>加权分</th></tr>';
   dimNames.forEach((dim, di) => {
     const s = scores.slice(di*5, di*5+5);
@@ -647,16 +707,14 @@ function renderResult(scores, analysis) {
 
   // Due Diligence
   const ddCard = document.getElementById('ddCard');
-  if (analysis && analysis.due_diligence && analysis.due_diligence.length > 0) {
+  if (src && src.due_diligence && src.due_diligence.length > 0) {
     let ddHtml = '';
-    analysis.due_diligence.forEach((dd, i) => {
-      ddHtml += `<div class="dd-item"><span class="priority">P${i+1}</span>${dd}</div>`;
-    });
+    src.due_diligence.forEach((dd, i) => { ddHtml += `<div class="dd-item"><span class="priority">P${i+1}</span>${dd}</div>`; });
     document.getElementById('ddItems').innerHTML = ddHtml;
     ddCard.style.display = 'block';
   } else { ddCard.style.display = 'none'; }
 
-  // Compare with benchmarks
+  // Compare
   let tableHtml = '<tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>';
   const allItems = [[name,stage,composite,grade,'待验证'],...BENCHMARK.map(b=>[b[0],b[1],b[2],b[3],b[4]])];
   allItems.sort((a,b) => b[2] - a[2]);
@@ -666,7 +724,6 @@ function renderResult(scores, analysis) {
   });
   document.getElementById('compareTable').innerHTML = tableHtml;
 
-  // Investment advice
   const advices = {A:'🟢 强烈推荐 — 综合优势显著，建议优先推进尽调',B:'🔵 值得深入 — 整体可行，关注劣势维度风险',C:'🟡 谨慎评估 — 存在明显短板，需重点验证关键假设',D:'🔴 风险较高 — 多维度不足，建议暂缓或放弃'};
   document.getElementById('advice').textContent = advices[grade];
 
@@ -681,83 +738,39 @@ function exportReport() {
   const stageLabel = {seed:'种子轮',early:'A轮/早期',late:'B轮+/后期',pre_ipo:'Pre-IPO'}[stage];
   const date = new Date().toISOString().split('T')[0];
   const icons = ["👥","📈","🔬","💰","🚪","🏛️","⚡"];
+  const src = analysis && analysis.scores ? analysis : null;
   
   let md = `# PE-Score 投资评分报告\n\n`;
-  md += `**项目名称**：${name}  \n`;
-  md += `**投资阶段**：${stageLabel}  \n`;
-  md += `**评分日期**：${date}  \n`;
-  md += `**综合评分**：**${composite.toFixed(2)} / 5.0** — **${grade}级**  \n\n`;
-  md += `---\n\n`;
-
-  if (analysis && analysis.summary) {
-    md += `## 投资摘要\n\n${analysis.summary}\n\n`;
-  }
-
-  if (analysis && analysis.risk_warnings) {
-    md += `## 🔴 核心风险警示\n\n`;
-    analysis.risk_warnings.forEach((r, i) => { md += `${i+1}. ${r}\n`; });
-    md += `\n`;
-  }
-
-  if (analysis && analysis.highlights) {
-    md += `## 🟢 核心亮点\n\n`;
-    analysis.highlights.forEach((h, i) => { md += `${i+1}. ${h}\n`; });
-    md += `\n`;
-  }
-
-  md += `## 维度评分\n\n`;
-  md += `| 维度 | 均分 | 权重 | 加权分 |\n`;
-  md += `|------|------|------|--------|\n`;
-  dimNames.forEach((dim, i) => {
-    md += `| ${icons[i]} ${dim} | ${dimAvgs[i].toFixed(2)} | ${(weights[i]*100).toFixed(0)}% | ${dimWeighted[i].toFixed(2)} |\n`;
-  });
+  md += `**项目名称**：${name}  \n**投资阶段**：${stageLabel}  \n**评分日期**：${date}  \n**综合评分**：**${composite.toFixed(2)} / 5.0** — **${grade}级**  \n\n---\n\n`;
+  if (src && src.summary) md += `## 投资摘要\n\n${src.summary}\n\n`;
+  if (src && src.risk_warnings) { md += `## 🔴 核心风险警示\n\n`; src.risk_warnings.forEach((r,i) => md += `${i+1}. ${r}\n`); md += `\n`; }
+  if (src && src.highlights) { md += `## 🟢 核心亮点\n\n`; src.highlights.forEach((h,i) => md += `${i+1}. ${h}\n`); md += `\n`; }
+  md += `## 维度评分\n\n| 维度 | 均分 | 权重 | 加权分 |\n|------|------|------|--------|\n`;
+  dimNames.forEach((dim,i) => md += `| ${icons[i]} ${dim} | ${dimAvgs[i].toFixed(2)} | ${(weights[i]*100).toFixed(0)}% | ${dimWeighted[i].toFixed(2)} |\n`);
   md += `| **综合** | **${composite.toFixed(2)}** | **100%** | **${composite.toFixed(2)}** |\n\n`;
-
   md += `## 子指标评分明细\n\n`;
-  dimNames.forEach((dim, di) => {
-    md += `### ${icons[di]} ${dim}（${dimAvgs[di].toFixed(2)}）\n\n`;
-    md += `| 子指标 | 评分 |\n|--------|------|\n`;
-    DIMS[dim].forEach((sub, si) => {
-      md += `| ${sub[0]} | ${'⭐'.repeat(scores[di*5+si])} ${scores[di*5+si]}/5 |\n`;
-    });
+  dimNames.forEach((dim,di) => {
+    md += `### ${icons[di]} ${dim}（${dimAvgs[di].toFixed(2)}）\n\n| 子指标 | 评分 |\n|--------|------|\n`;
+    DIMS[dim].forEach((sub,si) => md += `| ${sub[0]} | ${'⭐'.repeat(scores[di*5+si])} ${scores[di*5+si]}/5 |\n`);
     md += `\n`;
   });
-
-  if (analysis && analysis.dimension_analysis) {
+  if (src && src.dimension_analysis) {
     md += `## 各维度分析\n\n`;
-    dimNames.forEach((dim, i) => {
-      const da = analysis.dimension_analysis[dim];
-      if (!da) return;
-      md += `### ${icons[i]} ${dim}\n`;
-      md += `- **亮点**：${da.strength}\n`;
-      md += `- **疑虑**：${da.concern}\n\n`;
-    });
+    dimNames.forEach((dim,i) => { const da = src.dimension_analysis[dim]; if(!da) return; md += `### ${icons[i]} ${dim}\n- **亮点**：${da.strength}\n- **疑虑**：${da.concern}\n\n`; });
   }
-
-  if (analysis && analysis.due_diligence) {
-    md += `## 🎯 尽调建议\n\n`;
-    analysis.due_diligence.forEach((dd, i) => { md += `${i+1}. **P${i+1}** ${dd}\n`; });
-    md += `\n`;
-  }
-
-  md += `## 与回测案例对比\n\n`;
-  md += `| 项目 | 阶段 | 评分 | 评级 | 实际回报 |\n|------|------|------|------|----------|\n`;
+  if (src && src.due_diligence) { md += `## 🎯 尽调建议\n\n`; src.due_diligence.forEach((dd,i) => md += `${i+1}. **P${i+1}** ${dd}\n`); md += `\n`; }
+  md += `## 与回测案例对比\n\n| 项目 | 阶段 | 评分 | 评级 | 实际回报 |\n|------|------|------|------|----------|\n`;
   const allItems = [[name,stageLabel,composite,grade,'待验证'],...BENCHMARK.map(b=>[b[0],b[1],b[2],b[3],b[4]])];
   allItems.sort((a,b) => b[2] - a[2]);
-  allItems.forEach(item => {
-    md += `| ${item[0]} | ${item[1]} | ${typeof item[2]==='number'?item[2].toFixed(2):item[2]} | ${item[3]} | ${item[4]} |\n`;
-  });
+  allItems.forEach(item => md += `| ${item[0]} | ${item[1]} | ${typeof item[2]==='number'?item[2].toFixed(2):item[2]} | ${item[3]} | ${item[4]} |\n`);
   md += `\n`;
-
   const advices = {A:'🟢 强烈推荐 — 综合优势显著，建议优先推进尽调',B:'🔵 值得深入 — 整体可行，关注劣势维度风险',C:'🟡 谨慎评估 — 存在明显短板，需重点验证关键假设',D:'🔴 风险较高 — 多维度不足，建议暂缓或放弃'};
-  md += `## 💡 投资建议\n\n${advices[grade]}\n\n---\n\n*PE-Score v0.4.0 | 7维度35子指标 | 31案例回测 ρ=0.864 | 本报告仅为决策辅助，不构成投资建议*\n`;
+  md += `## 💡 投资建议\n\n${advices[grade]}\n\n---\n\n🔒 数据安全：所有敏感信息已自动脱敏 | AI分析后已执行自毁指令\n\n*PE-Score v0.5.0 | 7维度35子指标 | 31案例回测 ρ=0.864 | 本报告仅为决策辅助，不构成投资建议*\n`;
 
   const blob = new Blob([md], {type: 'text/markdown;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = `PE-Score_${name}_${date}.md`;
-  a.click();
+  a.href = url; a.download = `PE-Score_${name}_${date}.md`; a.click();
   URL.revokeObjectURL(url);
 }
 </script>
