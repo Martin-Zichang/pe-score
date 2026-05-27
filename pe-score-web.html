@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PE-Score 投资评分工具</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; font-size: 28px; margin: 20px 0 5px; }
+h1 span { color: #58a6ff; }
+.subtitle { text-align: center; color: #8b949e; margin-bottom: 30px; font-size: 14px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.card h2 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.card h2 .icon { font-size: 20px; }
+.dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.dim-avg { color: #58a6ff; font-size: 14px; font-weight: 600; }
+.sub-item { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; padding: 4px 0; }
+.sub-label { flex: 1; font-size: 13px; color: #c9d1d9; min-width: 120px; }
+.sub-desc { font-size: 11px; color: #8b949e; margin-left: 4px; }
+.stars { display: flex; gap: 2px; }
+.star { cursor: pointer; font-size: 20px; color: #30363d; transition: color 0.15s; user-select: none; }
+.star.active { color: #f0b429; }
+.star:hover { color: #f7c948; }
+.btn { display: block; width: 100%; padding: 14px; background: #238636; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+.btn:hover { background: #2ea043; }
+.result { display: none; margin-top: 20px; }
+.score-big { text-align: center; padding: 30px 0; }
+.score-num { font-size: 64px; font-weight: 800; }
+.grade { font-size: 28px; font-weight: 700; margin-top: 4px; }
+.grade-A { color: #3fb950; } .grade-B { color: #58a6ff; } .grade-C { color: #d29922; } .grade-D { color: #f85149; }
+.dim-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.dim-bar-label { width: 50px; text-align: right; font-size: 13px; color: #8b949e; }
+.dim-bar-track { flex: 1; height: 20px; background: #21262d; border-radius: 10px; overflow: hidden; }
+.dim-bar-fill { height: 100%; border-radius: 10px; transition: width 0.5s; }
+.dim-bar-val { width: 40px; font-size: 13px; font-weight: 600; }
+.meta-row { display: flex; gap: 12px; margin-bottom: 16px; }
+.meta-row input, .meta-row select { flex: 1; padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 14px; }
+.meta-row select { cursor: pointer; }
+.advice { text-align: center; padding: 16px; background: #0d1117; border-radius: 8px; margin-top: 12px; font-size: 15px; }
+.compare-section { margin-top: 20px; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.compare-table th, .compare-table td { padding: 8px 12px; border: 1px solid #30363d; text-align: center; }
+.compare-table th { background: #21262d; color: #8b949e; }
+.compare-table td:first-child { text-align: left; }
+.footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding-bottom: 20px; }
+.footer a { color: #58a6ff; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>PE-<span>Score</span> 🎯</h1>
+<p class="subtitle">7维度35子指标 PE投资评分框架 | 31案例回测 ρ=0.864 | <a href="https://github.com/Martin-Zichang/pe-score" style="color:#58a6ff">GitHub</a></p>
+
+<div class="card">
+<div class="meta-row">
+  <input type="text" id="projName" placeholder="项目名称">
+  <select id="projStage">
+    <option value="seed">种子轮</option>
+    <option value="early" selected>A轮/早期</option>
+    <option value="late">B轮+/后期</option>
+    <option value="pre_ipo">Pre-IPO</option>
+  </select>
+</div>
+</div>
+
+<div id="dimensions"></div>
+
+<button class="btn" onclick="calcScore()">📊 生成评分报告</button>
+
+<div class="result" id="result">
+  <div class="card">
+    <div class="score-big">
+      <div class="score-num" id="scoreNum"></div>
+      <div class="grade" id="gradeText"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📊</span> 维度评分</h2>
+    <div id="dimBars"></div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">💪</span> 优势维度</h2>
+    <p id="strengths" style="color:#3fb950"></p>
+    <h2 style="margin-top:12px"><span class="icon">⚠️</span> 劣势维度</h2>
+    <p id="weaknesses" style="color:#f85149"></p>
+  </div>
+  <div class="card">
+    <h2><span class="icon">💡</span> 投资建议</h2>
+    <div class="advice" id="advice"></div>
+  </div>
+  <div class="card compare-section">
+    <h2><span class="icon">📋</span> 历史对比</h2>
+    <table class="compare-table" id="compareTable">
+      <tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  PE-Score v0.1.0 | 数据驱动的PE投资评分框架 | <a href="https://github.com/Martin-Zichang/pe-score">GitHub</a><br>
+  ⚠️ 本工具仅为决策辅助，不构成投资建议
+</div>
+</div>
+
+<script>
+const DIMS = {
+  "团队": [
+    ["创始人行业势能", "行业积累深度和人脉"],
+    ["创始人操盘能力", "从0到1的商业落地能力"],
+    ["团队拼图完整度", "技术/产品/销售核心岗覆盖"],
+    ["治理与激励", "股权结构、决策机制"],
+    ["关键人风险", "核心人物离开的影响(5=无依赖)"]
+  ],
+  "市场": [
+    ["赛道天花板", "目标市场总规模"],
+    ["需求爆发时点", "已爆发/即将/遥远"],
+    ["竞争壁垒类型", "网络效应/技术/品牌/无"],
+    ["客户粘性", "切换成本和复购意愿"],
+    ["下游分散度", "客户集中度(5=高度分散)"]
+  ],
+  "技术": [
+    ["技术原创度", "自研vs集成模仿"],
+    ["知识产权厚度", "专利数量和保护范围"],
+    ["技术路线风险", "主流vs边缘，被颠覆可能"],
+    ["产业化成熟度", "实验室/中试/量产/规模化"],
+    ["研发追赶壁垒", "对手复制所需时间和资源"]
+  ],
+  "财务": [
+    ["营收质量", "营收真实性、持续性"],
+    ["盈利路径", "盈利时间表和可行性"],
+    ["资本效率", "每元投入产生的营收"],
+    ["现金流健康度", "经营性现金流、烧钱速度"],
+    ["财务规范性", "审计、关联交易透明度"]
+  ],
+  "退出": [
+    ["退出路径明确度", "IPO/并购/回购清晰度"],
+    ["退出时间窗口", "当前资本市场窗口"],
+    ["监管适配度", "是否符合上市监管要求"],
+    ["估值锚定", "可对标公司确定估值"],
+    ["流动性预期", "退出后交易量、减持难度"]
+  ],
+  "政策": [
+    ["产业政策方向", "国家政策是否支持"],
+    ["补贴税收红利", "直接补贴和税收优惠"],
+    ["合规风险", "监管处罚风险(5=低风险)"],
+    ["国资LP适配度", "是否符合政府基金偏好"],
+    ["地方政府支持", "土地、税收、资源支持"]
+  ],
+  "催化剂": [
+    ["短期催化事件", "6-12月内可能利好"],
+    ["估值弹性", "当前估值上升空间"],
+    ["行业周期位置", "萌芽/上行/过热/下行"],
+    ["逆向信号", "警示风险(5=无逆向)"],
+    ["下轮融资预期", "下轮确定性和估值提升"]
+  ]
+};
+
+const WEIGHTS = {
+  seed:  [0.15, 0.25, 0.25, 0.03, 0.07, 0.10, 0.15],
+  early: [0.15, 0.25, 0.25, 0.05, 0.10, 0.10, 0.10],
+  late:  [0.10, 0.20, 0.15, 0.10, 0.20, 0.15, 0.10],
+  pre_ipo:[0.08, 0.15, 0.10, 0.12, 0.25, 0.18, 0.12]
+};
+
+const BENCHMARK = [
+  ["宁德时代", "early", 4.87, "A", "500x"],
+  ["百济神州", "early", 4.60, "A", "455x"],
+  ["寒武纪", "early", 3.51, "B", "134x"],
+  ["湖南裕能", "late", 4.74, "A", "39x"],
+  ["拓荆科技", "early", 4.26, "A", "80x"],
+  ["中创新航", "late", 3.17, "B", "0.85x"],
+  ["华大智造", "late", 3.04, "B", "1.03x"],
+  ["柔宇科技", "early", 2.09, "C", "0x"],
+  ["拜腾汽车", "late", 1.83, "D", "0x"],
+  ["每日优鲜", "late", 1.31, "D", "0x"],
+];
+
+const dimNames = Object.keys(DIMS);
+const dimColors = ["#f97583","#79c0ff","#56d4dd","#d2a8ff","#f0b429","#3fb950","#ffab70"];
+const scores = new Array(35).fill(0);
+
+// Build UI
+const dimsDiv = document.getElementById("dimensions");
+let subIdx = 0;
+dimNames.forEach((dim, di) => {
+  let html = `<div class="card"><div class="dim-header"><h2><span class="icon">${["👥","📈","🔬","💰","🚪","🏛️","⚡"][di]}</span> ${dim}</h2><span class="dim-avg" id="dimAvg${di}">—</span></div>`;
+  DIMS[dim].forEach((sub, si) => {
+    const idx = di * 5 + si;
+    html += `<div class="sub-item">
+      <span class="sub-label">${sub[0]}<span class="sub-desc">${sub[1]}</span></span>
+      <div class="stars" id="stars${idx}">
+        ${[1,2,3,4,5].map(v => `<span class="star" data-idx="${idx}" data-val="${v}" onclick="setStar(${idx},${v})">★</span>`).join('')}
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+  dimsDiv.innerHTML += html;
+  subIdx += 5;
+});
+
+function setStar(idx, val) {
+  scores[idx] = val;
+  const stars = document.querySelectorAll(`#stars${idx} .star`);
+  stars.forEach((s, i) => s.classList.toggle('active', i < val));
+  // Update dim avg
+  const di = Math.floor(idx / 5);
+  const dimScores = scores.slice(di*5, di*5+5).filter(s => s > 0);
+  const avg = dimScores.length === 5 ? (dimScores.reduce((a,b)=>a+b,0)/5).toFixed(2) : '—';
+  document.getElementById(`dimAvg${di}`).textContent = dimScores.length === 5 ? `${avg}` : `已评${dimScores.length}/5`;
+}
+
+function calcScore() {
+  const name = document.getElementById('projName').value || '未命名项目';
+  const stage = document.getElementById('projStage').value;
+  
+  // Check all scored
+  const missing = scores.filter(s => s === 0).length;
+  if (missing > 0) {
+    alert(`还有 ${missing} 个子指标未评分，请全部打分后再生成报告`);
+    return;
+  }
+  
+  const weights = WEIGHTS[stage];
+  const dimAvgs = [];
+  for (let i = 0; i < 7; i++) {
+    dimAvgs.push(scores.slice(i*5, i*5+5).reduce((a,b)=>a+b,0) / 5);
+  }
+  const composite = dimAvgs.reduce((s, d, i) => s + d * weights[i], 0);
+  const grade = composite >= 4.0 ? 'A' : composite >= 3.0 ? 'B' : composite >= 2.0 ? 'C' : 'D';
+  
+  // Display
+  document.getElementById('scoreNum').textContent = composite.toFixed(2);
+  document.getElementById('scoreNum').style.color = grade === 'A' ? '#3fb950' : grade === 'B' ? '#58a6ff' : grade === 'C' ? '#d29922' : '#f85149';
+  document.getElementById('gradeText').textContent = `${grade}级`;
+  document.getElementById('gradeText').className = `grade grade-${grade}`;
+  
+  // Dim bars
+  const ranked = dimNames.map((d,i) => ({name:d, score:dimAvgs[i], idx:i})).sort((a,b) => b.score - a.score);
+  let barsHtml = '';
+  ranked.forEach(d => {
+    const pct = (d.score / 5 * 100).toFixed(0);
+    const color = dimColors[d.idx];
+    barsHtml += `<div class="dim-bar-row">
+      <span class="dim-bar-label">${d.name}</span>
+      <div class="dim-bar-track"><div class="dim-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+      <span class="dim-bar-val" style="color:${color}">${d.score.toFixed(2)}</span>
+    </div>`;
+  });
+  document.getElementById('dimBars').innerHTML = barsHtml;
+  
+  // Strengths & weaknesses
+  document.getElementById('strengths').textContent = ranked.slice(0,2).map(d => `${d.name}(${d.score.toFixed(2)})`).join('、');
+  document.getElementById('weaknesses').textContent = ranked.slice(-2).reverse().map(d => `${d.name}(${d.score.toFixed(2)})`).join('、');
+  
+  // Advice
+  const advices = {
+    A: '🟢 强烈推荐 — 综合优势显著，建议优先推进尽调',
+    B: '🔵 值得深入 — 整体可行，关注劣势维度风险',
+    C: '🟡 谨慎评估 — 存在明显短板，需重点验证关键假设',
+    D: '🔴 风险较高 — 多维度不足，建议暂缓或放弃'
+  };
+  document.getElementById('advice').textContent = advices[grade];
+  
+  // Compare table
+  let tableHtml = '<tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>';
+  // Add current project
+  tableHtml += `<tr style="background:#1f2937"><td><b>${name}</b></td><td>${stage}</td><td><b>${composite.toFixed(2)}</b></td><td class="grade-${grade}"><b>${grade}</b></td><td>待验证</td></tr>`;
+  BENCHMARK.forEach(b => {
+    tableHtml += `<tr><td>${b[0]}</td><td>${b[1]}</td><td>${b[2]}</td><td class="grade-${b[3]}">${b[3]}</td><td>${b[4]}</td></tr>`;
+  });
+  document.getElementById('compareTable').innerHTML = tableHtml;
+  
+  // Show result
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
