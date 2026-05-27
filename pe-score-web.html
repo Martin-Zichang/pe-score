@@ -7,24 +7,46 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+.container { max-width: 920px; margin: 0 auto; padding: 20px; }
 h1 { text-align: center; font-size: 28px; margin: 20px 0 5px; }
 h1 span { color: #58a6ff; }
 .subtitle { text-align: center; color: #8b949e; margin-bottom: 30px; font-size: 14px; }
 .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
 .card h2 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .card h2 .icon { font-size: 20px; }
+.tab-bar { display: flex; gap: 0; margin-bottom: 20px; background: #161b22; border-radius: 8px; border: 1px solid #30363d; overflow: hidden; }
+.tab-btn { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-size: 14px; font-weight: 600; background: transparent; color: #8b949e; border: none; transition: all 0.2s; }
+.tab-btn.active { background: #1f6feb; color: white; }
+.tab-btn:hover:not(.active) { background: #21262d; color: #e6edf3; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+textarea { width: 100%; min-height: 200px; padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #e6edf3; font-size: 13px; line-height: 1.5; resize: vertical; font-family: inherit; }
+textarea:focus { outline: none; border-color: #58a6ff; }
+.meta-row { display: flex; gap: 12px; margin-bottom: 16px; }
+.meta-row input, .meta-row select { flex: 1; padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 14px; }
+.meta-row select { cursor: pointer; }
+.btn { display: inline-block; padding: 12px 24px; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: #238636; } .btn-primary:hover { background: #2ea043; }
+.btn-blue { background: #1f6feb; } .btn-blue:hover { background: #388bfd; }
+.btn-orange { background: #d29922; } .btn-orange:hover { background: #e3b341; }
+.btn-sm { padding: 8px 16px; font-size: 12px; }
+.btn-block { display: block; width: 100%; text-align: center; }
+.btn-row { display: flex; gap: 10px; margin-top: 12px; }
+.prompt-box { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px; margin-top: 12px; font-size: 12px; line-height: 1.6; color: #c9d1d9; white-space: pre-wrap; max-height: 300px; overflow-y: auto; position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #1f6feb; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 8px; }
+.step { margin-bottom: 16px; padding: 12px; background: #0d1117; border-radius: 8px; border-left: 3px solid #1f6feb; }
+.step-label { font-size: 13px; color: #8b949e; margin-bottom: 6px; }
+.step-content { font-size: 14px; }
 .dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .dim-avg { color: #58a6ff; font-size: 14px; font-weight: 600; }
 .sub-item { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; padding: 4px 0; }
-.sub-label { flex: 1; font-size: 13px; color: #c9d1d9; min-width: 120px; }
+.sub-label { flex: 1; font-size: 13px; color: #c9d1d9; }
 .sub-desc { font-size: 11px; color: #8b949e; margin-left: 4px; }
 .stars { display: flex; gap: 2px; }
 .star { cursor: pointer; font-size: 20px; color: #30363d; transition: color 0.15s; user-select: none; }
 .star.active { color: #f0b429; }
 .star:hover { color: #f7c948; }
-.btn { display: block; width: 100%; padding: 14px; background: #238636; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
-.btn:hover { background: #2ea043; }
 .result { display: none; margin-top: 20px; }
 .score-big { text-align: center; padding: 30px 0; }
 .score-num { font-size: 64px; font-weight: 800; }
@@ -35,17 +57,17 @@ h1 span { color: #58a6ff; }
 .dim-bar-track { flex: 1; height: 20px; background: #21262d; border-radius: 10px; overflow: hidden; }
 .dim-bar-fill { height: 100%; border-radius: 10px; transition: width 0.5s; }
 .dim-bar-val { width: 40px; font-size: 13px; font-weight: 600; }
-.meta-row { display: flex; gap: 12px; margin-bottom: 16px; }
-.meta-row input, .meta-row select { flex: 1; padding: 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 14px; }
-.meta-row select { cursor: pointer; }
 .advice { text-align: center; padding: 16px; background: #0d1117; border-radius: 8px; margin-top: 12px; font-size: 15px; }
-.compare-section { margin-top: 20px; }
 .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
 .compare-table th, .compare-table td { padding: 8px 12px; border: 1px solid #30363d; text-align: center; }
 .compare-table th { background: #21262d; color: #8b949e; }
 .compare-table td:first-child { text-align: left; }
+.hint { font-size: 12px; color: #8b949e; margin-top: 6px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.badge-pro { background: #d29922; color: #0d1117; }
 .footer { text-align: center; color: #484f58; font-size: 12px; margin-top: 40px; padding-bottom: 20px; }
 .footer a { color: #58a6ff; text-decoration: none; }
+.divider { border: none; border-top: 1px solid #21262d; margin: 16px 0; }
 </style>
 </head>
 <body>
@@ -53,6 +75,7 @@ h1 span { color: #58a6ff; }
 <h1>PE-<span>Score</span> 🎯</h1>
 <p class="subtitle">7维度35子指标 PE投资评分框架 | 31案例回测 ρ=0.864 | <a href="https://github.com/Martin-Zichang/pe-score" style="color:#58a6ff">GitHub</a></p>
 
+<!-- Meta info -->
 <div class="card">
 <div class="meta-row">
   <input type="text" id="projName" placeholder="项目名称">
@@ -65,10 +88,64 @@ h1 span { color: #58a6ff; }
 </div>
 </div>
 
-<div id="dimensions"></div>
+<!-- Tabs -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('auto')">🤖 AI自动评分</button>
+  <button class="tab-btn" onclick="switchTab('manual')">✋ 手动评分</button>
+  <button class="tab-btn" onclick="switchTab('json')">📋 JSON导入</button>
+</div>
 
-<button class="btn" onclick="calcScore()">📊 生成评分报告</button>
+<!-- Tab 1: AI Auto Score -->
+<div class="tab-content active" id="tab-auto">
+  <div class="card">
+    <h2><span class="icon">🤖</span> AI自动评分 — 三步完成</h2>
+    
+    <div class="step">
+      <div class="step-label"><span class="step-num">1</span> 粘贴BP/项目简介内容</div>
+      <textarea id="bpText" placeholder="把BP内容、项目介绍、财务数据等粘贴到这里...&#10;&#10;支持任意格式，越详细评分越准确。至少包含：&#10;- 公司/产品简介&#10;- 市场与竞争&#10;- 团队背景&#10;- 财务数据&#10;- 融资信息"></textarea>
+    </div>
 
+    <div class="step">
+      <div class="step-label"><span class="step-num">2</span> 生成分析Prompt → 复制到任意AI</div>
+      <div class="btn-row">
+        <button class="btn btn-blue" onclick="genPrompt()">📋 生成Prompt</button>
+      </div>
+      <div id="promptArea" style="display:none; position:relative; margin-top:12px;">
+        <div class="prompt-box" id="promptText"></div>
+        <button class="btn btn-sm btn-orange copy-btn" onclick="copyPrompt()">复制</button>
+        <p class="hint">👆 复制上面的Prompt，粘贴到 ChatGPT / 豆包 / Claude / 任何AI，让它返回评分</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-label"><span class="step-num">3</span> 粘贴AI返回的评分</div>
+      <textarea id="aiResponse" placeholder="把AI返回的评分JSON粘贴到这里...&#10;&#10;格式示例：&#10;{&#10;  &quot;团队&quot;: [5,3,3,3,3],&#10;  &quot;市场&quot;: [4,4,4,3,3],&#10;  ...&#10;}" style="min-height:120px"></textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="parseAndScore()">📊 生成评分报告</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab 2: Manual Score -->
+<div class="tab-content" id="tab-manual">
+  <div id="dimensions"></div>
+  <button class="btn btn-primary btn-block" onclick="calcManualScore()">📊 生成评分报告</button>
+</div>
+
+<!-- Tab 3: JSON Import -->
+<div class="tab-content" id="tab-json">
+  <div class="card">
+    <h2><span class="icon">📋</span> JSON批量导入</h2>
+    <p style="color:#8b949e;font-size:13px;margin-bottom:12px">粘贴完整的35个子指标评分JSON（从API或其他工具导出）</p>
+    <textarea id="jsonInput" placeholder='[5,2,2,3,4, 5,3,4,3,2, 5,3,3,2,4, 1,2,1,1,2, 4,4,4,3,4, 5,4,5,5,4, 4,5,4,4,4]' style="min-height:100px"></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="jsonScore()">📊 生成评分报告</button>
+    </div>
+  </div>
+</div>
+
+<!-- Result -->
 <div class="result" id="result">
   <div class="card">
     <div class="score-big">
@@ -90,8 +167,8 @@ h1 span { color: #58a6ff; }
     <h2><span class="icon">💡</span> 投资建议</h2>
     <div class="advice" id="advice"></div>
   </div>
-  <div class="card compare-section">
-    <h2><span class="icon">📋</span> 历史对比</h2>
+  <div class="card">
+    <h2><span class="icon">📋</span> 与回测案例对比</h2>
     <table class="compare-table" id="compareTable">
       <tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>
     </table>
@@ -99,7 +176,7 @@ h1 span { color: #58a6ff; }
 </div>
 
 <div class="footer">
-  PE-Score v0.1.0 | 数据驱动的PE投资评分框架 | <a href="https://github.com/Martin-Zichang/pe-score">GitHub</a><br>
+  PE-Score v0.2.0 | 数据驱动的PE投资评分框架 | <a href="https://github.com/Martin-Zichang/pe-score">GitHub</a><br>
   ⚠️ 本工具仅为决策辅助，不构成投资建议
 </div>
 </div>
@@ -179,11 +256,97 @@ const BENCHMARK = [
 
 const dimNames = Object.keys(DIMS);
 const dimColors = ["#f97583","#79c0ff","#56d4dd","#d2a8ff","#f0b429","#3fb950","#ffab70"];
-const scores = new Array(35).fill(0);
+const manualScores = new Array(35).fill(0);
 
-// Build UI
+// ===== Tab switching =====
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', ['auto','manual','json'][i] === tab));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ===== Tab 1: AI Auto Score =====
+function genPrompt() {
+  const name = document.getElementById('projName').value || '该项目';
+  const stage = document.getElementById('projStage').value;
+  const stageMap = {seed:'种子轮',early:'A轮/早期',late:'B轮+/后期',pre_ipo:'Pre-IPO'};
+  const bp = document.getElementById('bpText').value.trim();
+  
+  if (!bp) { alert('请先粘贴BP内容'); return; }
+  
+  const prompt = `你是一位资深PE投资分析师，请根据以下项目信息，使用PE-Score评分框架（7维度35子指标，每项1-5分）对该项目进行评分。
+
+## 项目信息
+项目名称：${name}
+投资阶段：${stageMap[stage]}
+
+${bp}
+
+## 评分框架
+请严格按照以下7个维度、每个维度5个子指标逐一评分（1-5分）：
+1=很差/高风险，2=偏弱，3=一般/行业平均，4=不错/高于平均，5=很强/核心优势
+
+- 团队：创始人行业势能、创始人操盘能力、团队拼图完整度、治理与激励、关键人风险(5=无依赖)
+- 市场：赛道天花板、需求爆发时点、竞争壁垒类型、客户粘性、下游分散度(5=高度分散)
+- 技术：技术原创度、知识产权厚度、技术路线风险、产业化成熟度、研发追赶壁垒
+- 财务：营收质量、盈利路径、资本效率、现金流健康度、财务规范性
+- 退出：退出路径明确度、退出时间窗口、监管适配度、估值锚定、流动性预期
+- 政策：产业政策方向、补贴税收红利、合规风险(5=低风险)、国资LP适配度、地方政府支持
+- 催化剂：短期催化事件、估值弹性、行业周期位置、逆向信号(5=无逆向)、下轮融资预期
+
+## 输出格式
+请严格按照以下JSON格式输出，不要添加任何其他内容：
+{"团队":[1,1,1,1,1],"市场":[1,1,1,1,1],"技术":[1,1,1,1,1],"财务":[1,1,1,1,1],"退出":[1,1,1,1,1],"政策":[1,1,1,1,1],"催化剂":[1,1,1,1,1]}
+
+## 评分要求
+1. 基于投资时点可获取的信息评分，不要后视偏差
+2. 每个子指标必须给出1-5的整数评分
+3. 严格按JSON格式输出，不要有其他文字`;
+
+  document.getElementById('promptText').textContent = prompt;
+  document.getElementById('promptArea').style.display = 'block';
+}
+
+function copyPrompt() {
+  const text = document.getElementById('promptText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ 已复制';
+    setTimeout(() => btn.textContent = '复制', 2000);
+  });
+}
+
+function parseAndScore() {
+  const raw = document.getElementById('aiResponse').value.trim();
+  if (!raw) { alert('请粘贴AI返回的评分'); return; }
+  
+  try {
+    let data;
+    // Try to extract JSON from the response
+    const jsonMatch = raw.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('未找到JSON');
+    data = JSON.parse(jsonMatch[0]);
+    
+    // Validate
+    const scores = [];
+    for (const dim of dimNames) {
+      if (!data[dim] || !Array.isArray(data[dim]) || data[dim].length !== 5) {
+        throw new Error(`维度"${dim}"数据格式错误，需要5个评分`);
+      }
+      data[dim].forEach((v, i) => {
+        if (v < 1 || v > 5 || !Number.isInteger(v)) throw new Error(`${dim}第${i+1}个评分必须为1-5整数`);
+        scores.push(v);
+      });
+    }
+    
+    renderResult(scores);
+  } catch(e) {
+    alert('解析失败：' + e.message + '\n\n请确认AI返回的是正确的JSON格式');
+  }
+}
+
+// ===== Tab 2: Manual Score =====
 const dimsDiv = document.getElementById("dimensions");
-let subIdx = 0;
 dimNames.forEach((dim, di) => {
   let html = `<div class="card"><div class="dim-header"><h2><span class="icon">${["👥","📈","🔬","💰","🚪","🏛️","⚡"][di]}</span> ${dim}</h2><span class="dim-avg" id="dimAvg${di}">—</span></div>`;
   DIMS[dim].forEach((sub, si) => {
@@ -191,38 +354,56 @@ dimNames.forEach((dim, di) => {
     html += `<div class="sub-item">
       <span class="sub-label">${sub[0]}<span class="sub-desc">${sub[1]}</span></span>
       <div class="stars" id="stars${idx}">
-        ${[1,2,3,4,5].map(v => `<span class="star" data-idx="${idx}" data-val="${v}" onclick="setStar(${idx},${v})">★</span>`).join('')}
+        ${[1,2,3,4,5].map(v => `<span class="star" onclick="setStar(${idx},${v})">★</span>`).join('')}
       </div>
     </div>`;
   });
   html += `</div>`;
   dimsDiv.innerHTML += html;
-  subIdx += 5;
 });
 
 function setStar(idx, val) {
-  scores[idx] = val;
+  manualScores[idx] = val;
   const stars = document.querySelectorAll(`#stars${idx} .star`);
   stars.forEach((s, i) => s.classList.toggle('active', i < val));
-  // Update dim avg
   const di = Math.floor(idx / 5);
-  const dimScores = scores.slice(di*5, di*5+5).filter(s => s > 0);
-  const avg = dimScores.length === 5 ? (dimScores.reduce((a,b)=>a+b,0)/5).toFixed(2) : '—';
-  document.getElementById(`dimAvg${di}`).textContent = dimScores.length === 5 ? `${avg}` : `已评${dimScores.length}/5`;
+  const dimScores = manualScores.slice(di*5, di*5+5).filter(s => s > 0);
+  document.getElementById(`dimAvg${di}`).textContent = dimScores.length === 5 ? (dimScores.reduce((a,b)=>a+b,0)/5).toFixed(2) : `已评${dimScores.length}/5`;
 }
 
-function calcScore() {
-  const name = document.getElementById('projName').value || '未命名项目';
-  const stage = document.getElementById('projStage').value;
-  
-  // Check all scored
-  const missing = scores.filter(s => s === 0).length;
-  if (missing > 0) {
-    alert(`还有 ${missing} 个子指标未评分，请全部打分后再生成报告`);
-    return;
+function calcManualScore() {
+  const missing = manualScores.filter(s => s === 0).length;
+  if (missing > 0) { alert(`还有 ${missing} 个子指标未评分`); return; }
+  renderResult([...manualScores]);
+}
+
+// ===== Tab 3: JSON =====
+function jsonScore() {
+  const raw = document.getElementById('jsonInput').value.trim();
+  if (!raw) { alert('请粘贴评分数据'); return; }
+  try {
+    let scores;
+    if (raw.startsWith('[')) {
+      scores = JSON.parse(raw);
+    } else {
+      // Try extracting array
+      const m = raw.match(/\[[\d\s,]+\]/);
+      if (m) scores = JSON.parse(m[0]);
+    }
+    if (!scores || scores.length !== 35) throw new Error('需要35个评分');
+    scores.forEach((v,i) => { if (v < 1 || v > 5) throw new Error(`第${i+1}个评分必须在1-5之间`); });
+    renderResult(scores);
+  } catch(e) {
+    alert('解析失败：' + e.message);
   }
-  
+}
+
+// ===== Render Result =====
+function renderResult(scores) {
+  const stage = document.getElementById('projStage').value;
+  const name = document.getElementById('projName').value || '未命名项目';
   const weights = WEIGHTS[stage];
+  
   const dimAvgs = [];
   for (let i = 0; i < 7; i++) {
     dimAvgs.push(scores.slice(i*5, i*5+5).reduce((a,b)=>a+b,0) / 5);
@@ -230,31 +411,26 @@ function calcScore() {
   const composite = dimAvgs.reduce((s, d, i) => s + d * weights[i], 0);
   const grade = composite >= 4.0 ? 'A' : composite >= 3.0 ? 'B' : composite >= 2.0 ? 'C' : 'D';
   
-  // Display
   document.getElementById('scoreNum').textContent = composite.toFixed(2);
   document.getElementById('scoreNum').style.color = grade === 'A' ? '#3fb950' : grade === 'B' ? '#58a6ff' : grade === 'C' ? '#d29922' : '#f85149';
   document.getElementById('gradeText').textContent = `${grade}级`;
   document.getElementById('gradeText').className = `grade grade-${grade}`;
   
-  // Dim bars
   const ranked = dimNames.map((d,i) => ({name:d, score:dimAvgs[i], idx:i})).sort((a,b) => b.score - a.score);
   let barsHtml = '';
   ranked.forEach(d => {
     const pct = (d.score / 5 * 100).toFixed(0);
-    const color = dimColors[d.idx];
     barsHtml += `<div class="dim-bar-row">
       <span class="dim-bar-label">${d.name}</span>
-      <div class="dim-bar-track"><div class="dim-bar-fill" style="width:${pct}%;background:${color}"></div></div>
-      <span class="dim-bar-val" style="color:${color}">${d.score.toFixed(2)}</span>
+      <div class="dim-bar-track"><div class="dim-bar-fill" style="width:${pct}%;background:${dimColors[d.idx]}"></div></div>
+      <span class="dim-bar-val" style="color:${dimColors[d.idx]}">${d.score.toFixed(2)}</span>
     </div>`;
   });
   document.getElementById('dimBars').innerHTML = barsHtml;
   
-  // Strengths & weaknesses
   document.getElementById('strengths').textContent = ranked.slice(0,2).map(d => `${d.name}(${d.score.toFixed(2)})`).join('、');
   document.getElementById('weaknesses').textContent = ranked.slice(-2).reverse().map(d => `${d.name}(${d.score.toFixed(2)})`).join('、');
   
-  // Advice
   const advices = {
     A: '🟢 强烈推荐 — 综合优势显著，建议优先推进尽调',
     B: '🔵 值得深入 — 整体可行，关注劣势维度风险',
@@ -263,16 +439,15 @@ function calcScore() {
   };
   document.getElementById('advice').textContent = advices[grade];
   
-  // Compare table
   let tableHtml = '<tr><th>项目</th><th>阶段</th><th>评分</th><th>评级</th><th>实际回报</th></tr>';
-  // Add current project
-  tableHtml += `<tr style="background:#1f2937"><td><b>${name}</b></td><td>${stage}</td><td><b>${composite.toFixed(2)}</b></td><td class="grade-${grade}"><b>${grade}</b></td><td>待验证</td></tr>`;
-  BENCHMARK.forEach(b => {
-    tableHtml += `<tr><td>${b[0]}</td><td>${b[1]}</td><td>${b[2]}</td><td class="grade-${b[3]}">${b[3]}</td><td>${b[4]}</td></tr>`;
+  const allItems = [[name, stage, composite, grade, '待验证'], ...BENCHMARK.map(b=>[b[0],b[1],b[2],b[3],b[4]])];
+  allItems.sort((a,b) => b[2] - a[2]);
+  allItems.forEach((item, i) => {
+    const isUser = i === allItems.findIndex(x => x[0] === name);
+    tableHtml += `<tr${isUser?' style="background:#1f2937;font-weight:600"':''}><td>${item[0]}</td><td>${item[1]}</td><td>${typeof item[2]==='number'?item[2].toFixed(2):item[2]}</td><td class="grade-${item[3]}">${item[3]}</td><td>${item[4]}</td></tr>`;
   });
   document.getElementById('compareTable').innerHTML = tableHtml;
   
-  // Show result
   document.getElementById('result').style.display = 'block';
   document.getElementById('result').scrollIntoView({behavior: 'smooth'});
 }
